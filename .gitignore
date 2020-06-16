@@ -7,3 +7,6 @@
 
 ### Credentials
 include/settings.h
+
+### BUILD
+build
