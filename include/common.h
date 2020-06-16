@@ -15,6 +15,7 @@ extern "C" {
 
 #include "esp_err.h"
 #include "tcpip_adapter.h"
+#include "esp_log.h"
 
 
 
