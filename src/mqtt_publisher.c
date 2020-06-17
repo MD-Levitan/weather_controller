@@ -157,7 +157,7 @@ mqtt_publisher_t *create_mqtt_publisher_anonymous(const char *host, uint16_t por
         return NULL;
     }
 
-    //this->public.publish_string = _publish_string;
+    this->public.publish_string = _publish_string;
     this->public.destroy = _destroy;
 
     return &this->public;
@@ -203,7 +203,7 @@ mqtt_publisher_t *create_mqtt_publisher_authenticated(const char *host, uint16_t
         return NULL;
     }
 
-    //this->public.publish_string = _publish_string;
+    this->public.publish_string = _publish_string;
     this->public.destroy = _destroy;
 
     return &this->public;
