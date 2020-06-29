@@ -6,6 +6,7 @@
 
 #include "mqtt_publisher.h"
 #include "macros.h"
+#include "device.h"
 
 typedef void (*job_t)(void *);
 typedef struct arg_t arg_t;
@@ -44,4 +45,4 @@ static job_t jobs[] = {//get_info_from_device,
                        update_temperature, update_info, update_admin_info,
                        update_battery, update_work_time, update_status, update_version};
 
-#endif //JOBS_H_
+#endif /* JOBS_H_ */

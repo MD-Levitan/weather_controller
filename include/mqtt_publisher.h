@@ -59,4 +59,4 @@ mqtt_publisher_t *create_mqtt_publisher_anonymous(const char *host, uint16_t por
 
 mqtt_publisher_t *create_mqtt_publisher_authenticated(const char *host, uint16_t port, const char *username, const char *password);
 
-#endif //MQTT_publisher_H_
+#endif /* MQTT_publisher_H_ */
