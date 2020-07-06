@@ -8,7 +8,7 @@
 typedef struct device_complex_t device_complex_t;
 
 /**
- *  Complex of sensors which collecgted data.
+ *  Complex of sensors which collected data.
  *  Sensors: DHT11, BMP180.
  */
 struct device_complex_t

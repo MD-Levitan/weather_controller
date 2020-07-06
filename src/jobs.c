@@ -30,7 +30,7 @@ void update_temperature(void *arg_void)
 
         message = malloc(MAX_STRING);
         // arg->device->get_indicators(arg->device, &ind);
-        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_USER_TEMPERATURE], 15.2);
+        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_USER_TEMPERATURE], arg->device->get_temperature(arg->device));
         status = arg->publisher->publish_string(arg->publisher, message, TOPIC_USER_TEMPERATURE);
         ESP_LOGI(JOBS_INFO_TAG, "update Temperature status");
         free(message);
@@ -64,7 +64,7 @@ void update_humidity(void *arg_void)
 
         message = malloc(MAX_STRING);
         // arg->device->get_indicators(arg->device, &ind);
-        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_USER_HUMIDITY], 777);
+        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_USER_HUMIDITY], arg->device->get_humidity(arg->device));
         status = arg->publisher->publish_string(arg->publisher, message, TOPIC_USER_HUMIDITY);
         ESP_LOGI(JOBS_INFO_TAG, "update Humidity status");
         free(message);
@@ -97,7 +97,7 @@ void update_pressure(void *arg_void)
 
         message = malloc(MAX_STRING);
         //arg->device->get_indicators(arg->device, &ind);
-        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_USER_PRESSURE], 0.88);
+        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_USER_PRESSURE], arg->device->get_pressure(arg->device));
         status = arg->publisher->publish_string(arg->publisher, message, TOPIC_USER_PRESSURE);
         ESP_LOGI(JOBS_INFO_TAG, "update Pressure status");
         free(message);
@@ -122,7 +122,7 @@ void update_status(void *arg_void)
         }
 
         message = malloc(MAX_STRING);
-        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_USER_STATUS], 1); //arg->device->get_status(arg->device));
+        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_USER_STATUS], arg->device->get_status(arg->device));
         status = arg->publisher->publish_string(arg->publisher, message, TOPIC_USER_STATUS);
         ESP_LOGI(JOBS_INFO_TAG, "update device status");
         free(message);
@@ -153,7 +153,7 @@ void update_work_time(void *arg_void)
         // }
 
         message = malloc(MAX_STRING);
-        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_ADMIN_WORK_TIME], 100); //arg->device->get_work_time(arg->device));
+        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_ADMIN_WORK_TIME], arg->device->get_work_time(arg->device));
         status = arg->publisher->publish_string(arg->publisher, message, TOPIC_ADMIN_WORK_TIME);
         ESP_LOGI(JOBS_INFO_TAG, "update work time");
         free(message);
@@ -215,7 +215,7 @@ void update_version(void *arg_void)
         // }
 
         message = malloc(MAX_STRING);
-        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_ADMIN_MODEL], 1); //arg->device->get_version(arg->device));
+        snprintf(message, MAX_STRING - 1, message_templates[TOPIC_ADMIN_MODEL], arg->device->get_version(arg->device));
         status = arg->publisher->publish_string(arg->publisher, message, TOPIC_ADMIN_MODEL);
         ESP_LOGI(JOBS_INFO_TAG, "update version");
         free(message);

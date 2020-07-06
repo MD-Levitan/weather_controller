@@ -26,31 +26,8 @@
 #include "mqtt_publisher.h"
 #include "jobs.h"
 
-
-
-// void dht_main()
-// {
-//     DHT11_init(GPIO_NUM_4);
-
-//     while(1) {
-//         printf("Temperature is %d \n", DHT11_read().temperature);
-//         printf("Humidity is %d\n", DHT11_read().humidity);
-//         printf("Status code is %d\n", DHT11_read().status);
-//         vTaskDelay(5000 / portTICK_RATE_MS);
-//     }
-// }
-
-// void mq9_main()
-// {
-//     DHT11_init(GPIO_NUM_4);
-
-//     while(1) {
-//         printf("Temperature is %d \n", DHT11_read().temperature);
-//         printf("Humidity is %d\n", DHT11_read().humidity);
-//         printf("Status code is %d\n", DHT11_read().status);
-//         vTaskDelay(5000 / portTICK_RATE_MS);
-//     }
-// }
+#include "device_complex.h"
+#include "device_simulator.h"
 
 
 static void mqtt_app_start(void)
@@ -62,6 +39,7 @@ static void mqtt_app_start(void)
     arg = malloc(sizeof(arg_t));
     arg->publisher = mqtt;
     arg->mutex = xSemaphoreCreateMutex();
+    arg->device = create_device_simulator();
 
     for (uint8_t job = 0; job < sizeof(jobs) / sizeof(jobs[0]); ++job)
     {

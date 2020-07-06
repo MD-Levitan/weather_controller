@@ -25,8 +25,8 @@ struct arg_t
     // /* Config of publisher */
     // config_t *config;
 
-    // /* Device */
-    // device_t *device;
+    /* Device */
+    device_interface_t *device;
 };
 
 void update_temperature(void *arg_void);

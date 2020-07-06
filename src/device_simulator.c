@@ -28,17 +28,31 @@ METHOD(device_interface_t, get_work_time, uint32_t, private_device_simulator_t *
     return value;
 }
 
-
 METHOD(device_interface_t, get_status, device_status_t, private_device_simulator_t *this)
 {
-     return this->status;
+    return this->status;
 }
 
 METHOD(device_interface_t, get_indicators, void, private_device_simulator_t *this, indicators_t *ind)
 {
     ind->temperature = (double)(rand() % 2000 + 2000) / 100;
-    ind->humidity =  rand() % 100;
+    ind->humidity = rand() % 100;
     ind->pressure = rand() % 100 + 700;
+}
+
+METHOD(device_interface_t, get_temperature, double, private_device_simulator_t *this, indicators_t *ind)
+{
+    return (double)(rand() % 2000 + 2000) / 100;
+}
+
+METHOD(device_interface_t, get_pressure, uint32_t, private_device_simulator_t *this, indicators_t *ind)
+{
+    return rand() % 100 + 700;
+}
+
+METHOD(device_interface_t, get_humidity, uint8_t, private_device_simulator_t *this, indicators_t *ind)
+{
+    return rand() % 100;
 }
 
 METHOD(device_interface_t, destroy, void, private_device_simulator_t *this)
@@ -50,8 +64,11 @@ device_simulator_t *create_device_simulator()
 {
     private_device_simulator_t *this;
     this = malloc(sizeof(private_device_simulator_t));
-    
+
     this->public.device_inteface.get_indicators = _get_indicators;
+    this->public.device_inteface.get_humidity = _get_humidity;
+    this->public.device_inteface.get_temperature = _get_temperature;
+    this->public.device_inteface.get_pressure = _get_pressure;
     this->public.device_inteface.get_work_time = _get_work_time;
     this->public.device_inteface.get_status = _get_status;
     this->public.device_inteface.get_version = _get_version;
