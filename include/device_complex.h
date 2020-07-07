@@ -21,8 +21,10 @@ struct device_complex_t
  * @brief Create a device complex object
  * 
  * @param dht11_gpio            gpio of DHT11 sensor
+ * @param sda_gpio              gpio of SDA
+ * @param slc_gpio              gpio of SLC
  * @return device_complex_t* 
  */
-device_complex_t *create_device_complex(gpio_num_t dht11_gpio);
+device_complex_t *create_device_complex(gpio_num_t dht11_gpio, gpio_num_t sda_gpio, gpio_num_t slc_gpio);
 
 #endif /* DEVICE_COMPLEX_H_ */

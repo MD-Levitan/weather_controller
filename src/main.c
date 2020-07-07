@@ -29,6 +29,7 @@
 #include "device_complex.h"
 #include "device_simulator.h"
 
+#include "ota.h"
 
 static void mqtt_app_start(void)
 {
@@ -50,6 +51,14 @@ static void mqtt_app_start(void)
 
 void app_main()
 {
+    esp_err_t err = nvs_flash_init();
+    if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND)
+    {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        err = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(err);
+
     ESP_LOGI(MQTT_TAG, "[APP] Startup..");
     ESP_LOGI(MQTT_TAG, "[APP] Free memory: %d bytes", esp_get_free_heap_size());
     ESP_LOGI(MQTT_TAG, "[APP] IDF version: %s", esp_get_idf_version());
@@ -59,15 +68,10 @@ void app_main()
     esp_log_level_set(JOBS_TAG, ESP_LOG_VERBOSE);
     esp_log_level_set(JOBS_INFO_TAG, ESP_LOG_DEBUG);
 
-    ESP_ERROR_CHECK(nvs_flash_init());
     tcpip_adapter_init();
     ESP_ERROR_CHECK(esp_event_loop_create_default());
-
-    /* This helper function configures Wi-Fi or Ethernet, as selected in menuconfig.
-     * Read "Establishing Wi-Fi or Ethernet Connection" section in
-     * examples/protocols/README.md for more information about this function.
-     */
     ESP_ERROR_CHECK(example_connect());
 
-    mqtt_app_start();
+    start_ota_updater();
+    //mqtt_app_start();
 }

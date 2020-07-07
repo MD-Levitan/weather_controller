@@ -118,7 +118,7 @@ METHOD(device_interface_t, destroy, void, private_device_complex_t *this)
     free(this);
 }
 
-device_complex_t *create_device_complex(gpio_num_t dht11_gpio)
+device_complex_t *create_device_complex(gpio_num_t dht11_gpio, gpio_num_t sda_gpio, gpio_num_t slc_gpio)
 {
     private_device_complex_t *this;
     this = malloc(sizeof(private_device_complex_t));
@@ -133,7 +133,7 @@ device_complex_t *create_device_complex(gpio_num_t dht11_gpio)
     this->public.device_inteface.destroy = _destroy;
 
     DHT11_init(dht11_gpio);
-    this->sensor = create_bmp_sensor_default();
+    this->sensor = create_bmp_sensor(sda_gpio, slc_gpio, BMP085_MODE_STANDARD);
 
     if (this->sensor == NULL ||
         this->sensor->begin(this->sensor) != STATUS_OK)
