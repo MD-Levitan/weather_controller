@@ -1,0 +1,10 @@
+// select_firmware
+curl -i -s -k -X $'POST' \
+    -H $'Host: 192.168.100.20:5000' -H $'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H $'Accept-Language: en-US,en;q=0.5' -H $'Accept-Encoding: gzip, deflate' -H $'Connection: close' -H $'Content-Type: application/json' -H $'Upgrade-Insecure-Requests: 1' -H $'Content-Length: 13' \
+    --data-binary $'{\"version\":0}' \
+    $'http://192.168.100.20:5000/api/v1/select_firmware'
+
+// get latest_firmware
+curl -i -s -k -X $'GET' \
+    -H $'Host: 192.168.100.20:5000' -H $'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H $'Accept-Language: en-US,en;q=0.5' -H $'Accept-Encoding: gzip, deflate' -H $'Connection: close' -H $'Upgrade-Insecure-Requests: 1' \
+    $'http://192.168.100.20:5000/api/v1/latest_firmware'
